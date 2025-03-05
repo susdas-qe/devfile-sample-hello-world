@@ -1,3 +1,4 @@
+# Now check has been included, should again try with source_branch.startsWith("refs/heads/gh-readonly-queue")
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
@@ -5,10 +6,9 @@ metadata:
     build.appstudio.openshift.io/repo: https://github.com/susdas-qe/devfile-sample-hello-world?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
-    build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/cancel-in-progress: "true"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: ((event == "pull_request" && target_branch == "default") || (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))
+    pipelinesascode.tekton.dev/on-cel-expression: ((event == "pull_request" && target_branch == "default") || (event == "push" && target_branch.startsWith("gh-readonly-queue/default/")))
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: build-suite-test-application-iorp
